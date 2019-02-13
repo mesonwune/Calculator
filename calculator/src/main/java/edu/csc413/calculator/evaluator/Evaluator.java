@@ -11,7 +11,7 @@ public class Evaluator {
   private Stack<Operand> operandStack;
   private Stack<Operator> operatorStack;
   private StringTokenizer tokenizer;
-  private static final String DELIMITERS = "+-*^/";
+  private static String DELIMITERS = "+-*^/";
 
   public Evaluator() {
     operandStack = new Stack<>();
@@ -34,7 +34,7 @@ public class Evaluator {
 
     while ( this.tokenizer.hasMoreTokens() ) {
       // filter out spaces
-      if ( !( token = this.tokenizer.nextToken() ).equals( " " )) {
+      if ( !( token = this.tokenizer.nextToken().trim()).equals( "" )) {
         // check if token is an operand
         if ( Operand.check( token )) {
           operandStack.push( new Operand( token ));
@@ -50,7 +50,7 @@ public class Evaluator {
           // and values will be instances of the Operators.  See Operator class
           // skeleton for an example.
           Operator newOperator = new Operator();
-          
+
           while (operatorStack.peek().priority() >= newOperator.priority() ) {
             // note that when we eval the expression 1 - 2 we will
             // push the 1 then the 2 and then do the subtraction operation

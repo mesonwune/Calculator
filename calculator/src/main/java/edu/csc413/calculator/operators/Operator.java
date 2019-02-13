@@ -1,7 +1,5 @@
 package edu.csc413.calculator.operators;
 
-
-
 import edu.csc413.calculator.evaluator.Operand;
 
 import java.util.HashMap;
@@ -17,10 +15,19 @@ public abstract class Operator {
     // HashMap operators = new HashMap();
     // operators.put( "+", new AdditionOperator() );
     // operators.put( "-", new SubtractionOperator() );
-    
+    private static HashMap<String, Operator> operators;
+    static{
+        operators = new HashMap<>();
+        operators.put("+", new AddOperator());
+        operators.put("-", new SubtractOperator());
+        operators.put("*", new MultiplyOperator());
+        operators.put("/", new DivideOperator());
+        operators.put("^", new PowerOperator());
+    }
     
     public abstract int priority();
     public abstract Operand execute(Operand op1, Operand op2 );
+
 
 
     /**
@@ -29,10 +36,32 @@ public abstract class Operator {
      * for example token.equals("+") and so on.
      * Think about what happens if we add more operators.
      */
-    public static boolean check( String token ) {
+    public static boolean check( String token )
+    {
+        if (operators.containsKey(token))
+        {
+            return true;
+        }
         return false;
     }
 
 
-    public static Operator getOperator(String token){return null;}
+    public static Operator getOperator(String token)
+    {
+        if (check(token))
+        {
+            return operators.get(token);
+        }
+        return null;
+    }
+
+    public static String getAllOperators()
+    {
+        String list = "";
+        for (String key : operators.keySet())
+        {
+            list += key;
+        }
+        return list;
+    }
 }

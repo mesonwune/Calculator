@@ -1,4 +1,7 @@
 package edu.csc413.calculator.evaluator;
+
+import edu.csc413.calculator.operators.Operator;
+
 /**
  * Operand class used to represent an operand
  * in a valid mathematical expression.
@@ -6,27 +9,36 @@ package edu.csc413.calculator.evaluator;
 public class Operand {
   /**
   * construct operand from string token.
-  */  
-  public Operand( String token ) {
-    
+  */
+  private int operand;
+
+  public Operand( String token )
+  {
+    operand = Integer.parseInt(token);
   }
   /**
    * construct operand from integer
    */
-  public Operand( int value ) {
-    
+  public Operand( int value )
+  {
+    operand = value;
   }
   /**
-   * return value of opernad
+   * return value of operand
    */
   public int getValue() {
-      return 0;
+      return operand;
   }
   /**
    * Check to see if given token is a valid
    * operand.
    */
-  public static boolean check( String token ) {
+  public static boolean check( String token )
+  {
+    if (!Operator.check(token))
+    {
+      return true;
+    }
     return false;
   }
 }
