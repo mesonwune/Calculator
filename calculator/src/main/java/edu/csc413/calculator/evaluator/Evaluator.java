@@ -84,11 +84,11 @@ public class Evaluator {
               else
               {
                 Operator oldOpr = operatorStack.pop();
-                System.out.println(oldOpr);
+                //System.out.println(oldOpr);
                 Operand op2 = operandStack.pop();
-                System.out.println(op2);
+                //System.out.println(op2);
                 Operand op1 = operandStack.pop();
-                System.out.println(op1);
+                //System.out.println(op1);
                 operandStack.push(oldOpr.execute(op1, op2));
               }
             }
