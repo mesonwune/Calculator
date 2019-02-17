@@ -68,14 +68,29 @@ public class Evaluator {
               // push the 1 then the 2 and then do the subtraction operation
               // This means that the first number to be popped is the
               // second operand, not the first operand - see the following code
+              if (operatorStack.peek().equals("("))
+              {
+                int firstIndex = expression.indexOf("(");
+                int secondIndex = expression.indexOf(")");
 
-              Operator oldOpr = operatorStack.pop();
-              System.out.println(oldOpr);
-              Operand op2 = operandStack.pop();
-              System.out.println(op2);
-              Operand op1 = operandStack.pop();
-              System.out.println(op1);
-              operandStack.push(oldOpr.execute(op1, op2));
+                String rest = expression.substring(secondIndex + 1);
+
+                String parentheses = expression.substring(firstIndex + 1, secondIndex);
+                int summ = eval(parentheses);
+
+                expression = Integer.toString(summ) + rest;
+                System.out.println(expression);
+              }
+              else
+              {
+                Operator oldOpr = operatorStack.pop();
+                System.out.println(oldOpr);
+                Operand op2 = operandStack.pop();
+                System.out.println(op2);
+                Operand op1 = operandStack.pop();
+                System.out.println(op1);
+                operandStack.push(oldOpr.execute(op1, op2));
+              }
             }
 
           operatorStack.push( newOperator );
